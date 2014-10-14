@@ -1,0 +1,24 @@
+Matlab Plot Code:
+f = @(y, t) -15*y;
+  T = 1;
+  y0 = 1;
+  h_vec=[0.01 0.2 0.35];
+      h=h_vec(1);
+      ts = 0:h:T;
+      [t, yEE] = eulerExpl(f, h, T, 0, y0);
+      figure(i); clf; hold on
+      plot(ts, yEE, '-b','LineWidth',2);h=h_vec(2);
+      ts = 0:h:T;
+      [t, yEE] = eulerExpl(f, h, T, 0, y0);
+      plot(ts, yEE, '-g','LineWidth',2);h=h_vec(3);
+      ts = 0:h:T;
+      [t, yEE] = eulerExpl(f, h, T, 0, y0);
+      plot(ts, yEE, '-r','LineWidth',2);
+      xlabel('t')
+      ylabel('y(t)')
+      yEx =  exp(-15*ts);
+      plot(ts, yEx, '-k','LineWidth',2);
+      legend('Euler (0.01)', 'Euler (0.2)', 'Euler (0.35)', 'exakt')
+      h = legend; h = legend(h, 'Location', 'best');
+      filename = ['pl12_3_h' num2str(h_vec(i),'%.0e')];
+      print('-dpsc', sprintf('%s.eps', filename));
